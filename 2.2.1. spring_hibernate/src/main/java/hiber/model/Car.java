@@ -1,14 +1,15 @@
 package hiber.model;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
-@Table (name = "car")
+@Table(name = "cars")
 public class Car {
+
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue
+    @Column(name = "car_id")
+    private Long carId;
 
     @Column(name = "model")
     private String model;
@@ -16,20 +17,21 @@ public class Car {
     @Column(name = "series")
     private int series;
 
-    public Car() {
-    }
-
     public Car(String model, int series) {
         this.model = model;
         this.series = series;
     }
 
-    public int getSeries() {
-        return series;
+    public Car() {
+
     }
 
-    public void setSeries(int series) {
-        this.series = series;
+    public Long getCarId() {
+        return carId;
+    }
+
+    public void setCarId(Long carId) {
+        this.carId = carId;
     }
 
     public String getModel() {
@@ -40,25 +42,20 @@ public class Car {
         this.model = model;
     }
 
+    public int getSeries() {
+        return series;
+    }
+
+    public void setSeries(int series) {
+        this.series = series;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
-                "id=" + id +
+                "carId=" + carId +
                 ", model='" + model + '\'' +
                 ", series=" + series +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Car car = (Car) o;
-        return series == car.series && Objects.equals(id, car.id) && Objects.equals(model, car.model);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, model, series);
     }
 }
